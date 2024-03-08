@@ -1,50 +1,44 @@
-# info de la materia: st-0263 <Tópicos especiales en telematica>
+# info de la materia: st-0263 Tópicos especiales en telematica
 #
-# Estudiante(s): nombre, email-eafit
+# Estudiante: Samuel Salazar Salazar, ssalazar1@eafit.edu.co
 #
-# Profesor: nombre, email-eafit
+# Profesor: Juan Carlos Montoya Mendoza, jcmontoy@eafit.edu.co
 #
-# <para borrar: EL OBJETIVO DE ESTA DOCUMENTACÍON ES QUE CUALQUIER LECTOR CON EL REPO, EN ESPECIAL EL PROFESOR, ENTIENDA EL ALCANCE DE LO DESARROLLADO Y QUE PUEDA REPRODUCIR SIN EL ESTUDIANTE EL AMBIENTE DE DESARROLLO Y EJECUTAR Y USAR LA APLICACIÓN SIN PROBLEMAS>
+# 
 
-# <para borrar: renombre este archivo a README.md cuando lo vaya a usar en un caso específico>
+# 
 
-# nombre del proyecto, lab o actividad
+# Reto1
 #
 # 1. breve descripción de la actividad
-#
+# 
 <texto descriptivo>
-## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+## 1.1. Que aspectos cumplió o desarrolló de la actividad propuesta por el profesor 
+Se logró la creación de los modulos de cliente y servidor, estos son capaces de listar los archivos que tenga cada nodo y tiene también pueden simular la carga y descarga de archivos.
 
-## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor (requerimientos funcionales y no funcionales)
+## 1.2. Que aspectos NO cumplió o desarrolló de la actividad propuesta por el profesor 
+Los aspectos que no se pudo cumplir fue la conexión exitosa entre instancias. Si hubo una conexión entre nodos pero hubo errores a la hora de transferir la información de los archivos.
 
 # 2. información general de diseño de alto nivel, arquitectura, patrones, mejores prácticas utilizadas.
+Se creó una red peer 2 peer en la cual cada nodo es representado por una instancia de AWS. Cada instancia tiene 3 archivos de codigo principales: el cliente, el servidor y la interfaz de servicio.
 
 # 3. Descripción del ambiente de desarrollo y técnico: lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+Para el cliente se utilizo node.js y las librerias usadas para esto reto es grpc-js para el uso de rpc, protoloader para cargar la interfaz de servicio y readline para recibir input desde consola.
+Para el servidor se utilizó python y las librerias usadas fueron grpc, concurrent para permitir la concurrencia, os para leer los archivos que tiene la instancia, y configparser para leer el archivo .config que tiene todas las configuraciones del servidor.
 
-## como se compila y ejecuta.
-## detalles del desarrollo.
-## detalles técnicos
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
-## opcional - detalles de la organización del código por carpetas o descripción de algún archivo. (ESTRUCTURA DE DIRECTORIOS Y ARCHIVOS IMPORTANTE DEL PROYECTO, comando 'tree' de linux)
-## 
-## opcionalmente - si quiere mostrar resultados o pantallazos 
+## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc
+No es necesario configurar ningun tipo de parametro ya que cada servidor tiene su .config.
+
 
 # 4. Descripción del ambiente de EJECUCIÓN (en producción) lenguaje de programación, librerias, paquetes, etc, con sus numeros de versiones.
+Para ejecutar toda la red, simplemente se debe conectarse a la instancia y correr el archivo server.py en cada instancia, despues desde la instancia que quiera se inicia el client.js
 
 # IP o nombres de dominio en nube o en la máquina servidor.
+IP ServidorReto1: 3.85.49.250
+IP ServidorReto2: 3.93.44.24
+IP ServidorReto3: 54.81.74.155
+ip ServidorReto4: 3.81.123.52
 
-## descripción y como se configura los parámetros del proyecto (ej: ip, puertos, conexión a bases de datos, variables de ambiente, parámetros, etc)
-
-## como se lanza el servidor.
 
 ## una mini guia de como un usuario utilizaría el software o la aplicación
-
-## opcionalmente - si quiere mostrar resultados o pantallazos 
-
-# 5. otra información que considere relevante para esta actividad.
-
-# referencias:
-<debemos siempre reconocer los créditos de partes del código que reutilizaremos, así como referencias a youtube, o referencias bibliográficas utilizadas para desarrollar el proyecto o la actividad>
-## sitio1-url 
-## sitio2-url
-## url de donde tomo info para desarrollar este proyecto
+ Al iniciar el cliente habrá en menu en el que puede escoger que opción a realizar.
