@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package p2pfileshare;
+
+// Servicio que define las operaciones de listado, descarga y carga
+service FileShareService {
+  rpc ListFiles(ListFilesRequest) returns (ListFilesResponse);
+  rpc DownloadFile(DownloadFileRequest) returns (DownloadFileResponse);
+  rpc UploadFile(UploadFileRequest) returns (UploadFileResponse);
+}
+
+// Mensaje de solicitud para listar archivos
+message ListFilesRequest {}
+
+// Mensaje de respuesta para listar archivos
+message ListFilesResponse {
+  repeated string filenames = 1;
+}
+
+// Mensaje de solicitud para descargar un archivo
+message DownloadFileRequest {
+  string filename = 1;
+}
+
+// Mensaje de respuesta para descargar un archivo
+message DownloadFileResponse {
+  string message = 1;
+}
+
+// Mensaje de solicitud para cargar un archivo
+message UploadFileRequest {
+  string filename = 1;
+}
+
+// Mensaje de respuesta para cargar un archivo
+message UploadFileResponse {
+  string message = 1;
+}
