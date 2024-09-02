@@ -27,7 +27,6 @@ def iniciar_servidor(config, cliente_p2p):
     hilo_http = threading.Thread(target=lambda: app.run(host=config['node']['ip'], port=config['node']['port']))
     hilo_http.start()
     
-    # Pasa también la lista de peers conocidos al hilo gRPC
     hilo_grpc = threading.Thread(target=start_grpc_server, args=(config['resources']['shared_directory'], config['node']['grpc_port']))
     hilo_grpc.start()
 
@@ -35,14 +34,11 @@ def iniciar_servidor(config, cliente_p2p):
     hilo_grpc.join()
 
 def iniciar_cliente(cliente_p2p, mi_grpc_port, local_shared_directory):
-    # Se realiza el bootstrap para descubrir peers en la red
     peers_descubiertos = cliente_p2p.realizar_bootstrap()
 
-    # Crear una función para obtener la lista actualizada de peers
     def obtener_peers_actualizados():
-        return cliente_p2p.peers_descubiertos  # Utiliza la lista actualizada de peers
+        return cliente_p2p.peers_descubiertos
 
-    # Iniciar la interfaz de búsqueda de archivos, pasando la función para obtener peers
     iniciar_cliente_grpc(obtener_peers_actualizados, local_shared_directory, mi_grpc_port)
 
     if peers_descubiertos:

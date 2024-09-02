@@ -6,13 +6,12 @@ import grpc_service_pb2_grpc
 
 class FileSearchService(grpc_service_pb2_grpc.FileSearchServicer):
     def __init__(self, shared_directory):
-        self.shared_directory = shared_directory  # Directorio compartido donde se almacenan los archivos
+        self.shared_directory = shared_directory
 
     def SearchFile(self, request, context):
         filename = request.filename
         print(f"Solicitud de búsqueda recibida para el archivo: {filename}")
 
-        # Buscar localmente en el directorio compartido
         try:
             if self._search_local_file(filename):
                 print(f"Archivo '{filename}' encontrado localmente en este nodo.")
@@ -25,12 +24,10 @@ class FileSearchService(grpc_service_pb2_grpc.FileSearchServicer):
             return grpc_service_pb2.SearchFileResponse(found=False)
 
     def _search_local_file(self, filename):
-        # Implementación de búsqueda en el directorio local
         filepath = os.path.join(self.shared_directory, filename)
         return os.path.exists(filepath)
 
 def start_grpc_server(shared_directory, grpc_port):
-    # Configura e inicia el servidor gRPC
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     file_search_service = FileSearchService(shared_directory)
     grpc_service_pb2_grpc.add_FileSearchServicer_to_server(file_search_service, server)

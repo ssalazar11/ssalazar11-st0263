@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 # Variables globales para IP, Puerto, Directorio, y Peers
 IP = "0.0.0.0"
-PORT = 5000
-GRPC_PORT = 6000  # Nuevo puerto gRPC
+PORT = 0
+GRPC_PORT = 0
 SHARED_DIRECTORY = "./shared_files"
 CLIENTE_P2P = None
 PEERS = []
@@ -30,7 +30,6 @@ def actualizar_peers(nuevos_peers):
 @app.route('/discover', methods=['GET'])
 def discover():
     global PEERS, IP, PORT, GRPC_PORT
-    # Asegurarse de que el nodo incluya su propia dirección y puerto gRPC en la lista de peers
     self_peer = {"ip": IP, "http_port": PORT, "grpc_port": GRPC_PORT}
     if self_peer not in PEERS:
         PEERS.append(self_peer)
@@ -49,7 +48,6 @@ def update_peers():
             actualizar_peers(peers_no_conocidos)
             print(f"Lista de peers actualizada después de notificación: {PEERS}")
             
-            # Propagar la información de estos nuevos peers a otros peers conocidos
             CLIENTE_P2P.notificar_peers(peers_no_conocidos)
         else:
             print("No hay peers nuevos que propagar.")
@@ -59,13 +57,12 @@ def update_peers():
 
 @app.route('/download/<filename>', methods=['GET'])
 def download_file(filename):
-    # Servicio dummy de descarga
     print(f"Solicitud de descarga para el archivo: {filename}")
     return jsonify({"status": "Archivo descargado exitosamente", "filename": filename}), 200
 
-# Ruta dummy para la subida de archivos
+
 @app.route('/upload/<filename>', methods=['GET'])
 def upload_file(filename):
-    # Servicio dummy de subida
+
     print(f"Archivo recibido para subir: {filename}")
     return jsonify({"status": "Archivo subido exitosamente", "filename": filename}), 200
