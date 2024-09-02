@@ -1,0 +1,12 @@
+{
+    "node": {
+      "ip": "",
+      "port": 5000,
+      "grpc_port":6000,
+      "bootstrap_peers": [""]
+    },
+    "resources": {
+      "shared_directory": "./archivos"
+    }
+  }
+  

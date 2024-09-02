@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service FileSearch {
+  rpc SearchFile (SearchFileRequest) returns (SearchFileResponse);
+}
+
+message SearchFileRequest {
+  string filename = 1;
+}
+
+message SearchFileResponse {
+  bool found = 1;
+  string location = 2;
+}
