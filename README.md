@@ -53,7 +53,8 @@
 Primero debemos clonar el repositorio:
 `git clone `
 ### 2. Instalacion de dependencias
-- Primero debe de instalar las librerías listadas anteriormente usando pip o el manejador de paquetes de su preferencia para Python  
+- Primero debe de instalar las librerías listadas anteriormente usando pip o el manejador de paquetes de su preferencia para Python:
+  `pip install -r requirements.txt`
 ### 3. Ejecución del nodo.  
 para ejecutar el nodo debe poner el siguiente comando en la terminal:  
 `python main.py --config <archivo_de_configuracion.json>`  
@@ -80,6 +81,10 @@ El siguiente codigo es un ejemplo del json necesario para cada nodo
 - node.port: Puerto HTTP del nodo.
 - node.grpc_port: Puerto gRPC del nodo.
 - Resources.shared_directory: dirección de la carpeta con los archivos
+
+## Nota
+Para los primeros dos nodos, el nodo 1 debe tener la dirección ip del nodo 2 en "bootstrap_peers" y el nodo 2 debe tener la dirección ip del nodo 1.
+
 
 
 
